@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SquadsAbbrevRouteImport } from './routes/squads/$abbrev'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SquadsAbbrevRoute = SquadsAbbrevRouteImport.update({
+  id: '/squads/$abbrev',
+  path: '/squads/$abbrev',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/squads/$abbrev': typeof SquadsAbbrevRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/squads/$abbrev': typeof SquadsAbbrevRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/squads/$abbrev': typeof SquadsAbbrevRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/squads/$abbrev'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/squads/$abbrev'
+  id: '__root__' | '/' | '/squads/$abbrev'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SquadsAbbrevRoute: typeof SquadsAbbrevRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/squads/$abbrev': {
+      id: '/squads/$abbrev'
+      path: '/squads/$abbrev'
+      fullPath: '/squads/$abbrev'
+      preLoaderRoute: typeof SquadsAbbrevRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SquadsAbbrevRoute: SquadsAbbrevRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

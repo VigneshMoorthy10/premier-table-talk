@@ -7,6 +7,18 @@ type CrestProps = {
 
 /** Shield-shaped club badge, gradient filled in the club colour with a sash. */
 export function Crest({ abbrev, color, size = 36, className }: CrestProps) {
+  if (abbrev === "LIV") {
+    return (
+      <img
+        src="/liverpool.jpg"
+        alt="Liverpool crest"
+        width={size}
+        height={size}
+        className={className}
+      />
+    );
+  }
+
   const id = `crest-${abbrev.toLowerCase()}`;
   return (
     <svg
