@@ -14,7 +14,161 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      matches: {
+        Row: {
+          away_score: number | null
+          away_team_id: string
+          created_at: string
+          home_score: number | null
+          home_team_id: string
+          id: string
+          kickoff: string
+          status: string
+        }
+        Insert: {
+          away_score?: number | null
+          away_team_id: string
+          created_at?: string
+          home_score?: number | null
+          home_team_id: string
+          id?: string
+          kickoff: string
+          status?: string
+        }
+        Update: {
+          away_score?: number | null
+          away_team_id?: string
+          created_at?: string
+          home_score?: number | null
+          home_team_id?: string
+          id?: string
+          kickoff?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_away_team_id_fkey"
+            columns: ["away_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_home_team_id_fkey"
+            columns: ["home_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      players: {
+        Row: {
+          age: number
+          appearances: number
+          assists: number
+          bio: string
+          clean_sheets: number
+          created_at: string
+          goals: number
+          height_cm: number
+          id: string
+          name: string
+          nationality: string
+          nationality_flag: string
+          position: string
+          preferred_foot: string
+          shirt_number: number
+          team_id: string
+        }
+        Insert: {
+          age: number
+          appearances?: number
+          assists?: number
+          bio?: string
+          clean_sheets?: number
+          created_at?: string
+          goals?: number
+          height_cm: number
+          id?: string
+          name: string
+          nationality: string
+          nationality_flag?: string
+          position: string
+          preferred_foot?: string
+          shirt_number: number
+          team_id: string
+        }
+        Update: {
+          age?: number
+          appearances?: number
+          assists?: number
+          bio?: string
+          clean_sheets?: number
+          created_at?: string
+          goals?: number
+          height_cm?: number
+          id?: string
+          name?: string
+          nationality?: string
+          nationality_flag?: string
+          position?: string
+          preferred_foot?: string
+          shirt_number?: number
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "players_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          abbrev: string
+          color: string
+          created_at: string
+          draws: number
+          id: string
+          losses: number
+          name: string
+          played: number
+          points: number
+          rank: number
+          wins: number
+        }
+        Insert: {
+          abbrev: string
+          color: string
+          created_at?: string
+          draws?: number
+          id?: string
+          losses?: number
+          name: string
+          played?: number
+          points?: number
+          rank: number
+          wins?: number
+        }
+        Update: {
+          abbrev?: string
+          color?: string
+          created_at?: string
+          draws?: number
+          id?: string
+          losses?: number
+          name?: string
+          played?: number
+          points?: number
+          rank?: number
+          wins?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
