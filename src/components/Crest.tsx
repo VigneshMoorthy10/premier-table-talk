@@ -25,7 +25,6 @@ export function Crest({ abbrev, color, size = 36, className }: CrestProps) {
         </linearGradient>
         <clipPath id={`${id}-clip`}>
           <path d="M30 1 L58 9 V36 C58 53 46 63 30 69 C14 63 2 53 2 36 V9 Z" />
-        </linearGradient>
         </clipPath>
       </defs>
       <g clipPath={`url(#${id}-clip)`}>
